@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+ $(function(){
+ $("#suminsured").hide();
+ $("#period").hide();
+ $("#searchField").click(function(){
+ console.log($("#searchField option:selected").text());
+ if($("#searchField option:selected").text() == "suminsured"){
+ $("#suminsured").show()
+ $("#period").hide()
+ }else if($("#searchField option:selected").text() == "period"){
+ $("#period").show()
+ $("#suminsured").hide()
+ }else{
+ $("#period").show()
+ $("#suminsured").show()
+}
+  });
+});
+    </script>
+</head>
+<body>
+<div>
+    <form action="#" th:action="@{/logout?logout=true}" method="post">
+        <p><input type="submit" value="Log out"/></p>
+    </form>
+</div>
+<div>
+    <form th:action="@{/searchByFields}" th:object=${obj} method="post">
+        <p>select search fields <select type="text" id="searchField" th:field="*{searchField}">
+            <option value="suminsured">suminsured</option>
+            <option value="period">period</option>
+            <option value="both">search with both</option>
+        </select></p>
+        <p id="suminsured">sum insured :<input type="text" defaultValue="" th:field="*{sumInsured}"/></p>
+        <p id="period">period : <input type="text" defaultValue="" th:field="*{period}"/></p>
+        <p><input type="submit" value="Submit"/></p>
+    </form>
+    <div>
+        <table id="table">
+            <thead>
+            <th>Id</th>
+            <th>Period</th>
+            <th>Premium</th>
+            <th>Product Code</th>
+            <th>Sum Insured</th>
+            <th>Total Amount</th>
+            <th>Message</th>
+            </thead>
+            <tbody>
+            <tr th:each="user:${datae}">
+                <td th:text="${user.id}">id</td>
+                <td th:text="${user.period}">Period</td>
+                <td th:text="${user.premiumAmount}">Premium</td>
+                <td th:text="${user.productCode}">Product code</td>
+                <td th:text="${user.sumInsured}">Sum insured</td>
+                <td th:text="${user.totalAmount}">Total</td>
+                <td th:text="${user.message}">Message</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

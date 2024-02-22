@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<div th:if="${param.sessionExpired}">
+    Your session has been expired please log in again to continue!.
+</div>
+<div th:if="${param.logout}">
+    You have been logged out.
+</div>
+<h1>Welcome!</h1>
+<p>Click <a th:href="@{/register}">here</a> to see a sign-up.</p>
+<p>or already a user login <a th:href="@{/login}">here</a>.</p>
+
+</body>
+</html>
